@@ -1,0 +1,48 @@
+{%extends 'base.html' %}
+{% block content %}
+
+<!--== Start Product Details Area Wrapper ==-->
+<section class="section-space">
+    <div class="container">
+        <div class="row product-details">
+                <ul class="product-details-thumb">
+                    <li style="padding:0;margin:0;float:left">
+                    <img src="{{ game.image }}" width="120" height="120" alt="Image">
+                    </li>
+                    <li style="padding:0;margin:0;float:left">
+                        <ul>
+                            <li>
+                    <h5 class="product-details-collection">{{ game.author }}</h5>
+                            </li>
+                            <li><h3 class="product-details-title">{{ game.name }}</h3>
+                            </li>
+                            <li>
+                                <div class="product-details-review mb-7">
+                        <div class="product-review-icon">
+                            {{ game.star_rating }}&nbsp;&nbsp;{{ game.content_rating }}
+                        </div>
+                    </div>
+
+                            </li>
+                            </ul>
+                    </li>
+                </ul>
+            <div class="col-lg-6">
+                <div class="product-details-content">
+                    <p class="mb-7">
+                        {{ game.introduction }}
+                    </p>
+                    <div class="product-details-pro-qty">
+                            <a type="submit" class="btn" data-bs-toggle="modal" href="{% url 'download' game.id %}" target="_blank"
+                                   data-bs-target="#action-CartAddModal">Download
+                            </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!--== End Product Details Area Wrapper ==-->
+
+{% endblock %}

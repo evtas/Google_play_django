@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section-space" xmlns="http://www.w3.org/1999/html">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title text-center">
+                    <h2 class="title">Goole Play Games</h2>
+                </div>
+                <div class="searchWrapper">
+                    <form action="" method="get">
+                        <input name='keywords' class="section-title text-center"
+                               placeholder="search"
+                               style="width:800px;height:50px;margin-left:180px">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-n4 mb-sm-n10 g-3 g-sm-6">
+            {% for game in games %}
+            <div class="col-6 col-lg-4 mb-4 mb-sm-9">
+                <!--== Start Product Item ==-->
+                <div class="product-item" href="{% url 'details' game.id%}" style="float: left">
+                    <div class="product-thumb" href="{% url 'details' game.id%}">
+                        <a href="{% url 'details' game.id%}"><img src="{{game.image}}" width="60" height="60" alt="Image-HasTech"></a>
+                        <div>
+                            <div class="product-rating" style="margin:0">
+                                <div class="rating">
+                                    {{ game.star_rating }}&nbsp;&nbsp;&nbsp;{{ game.content_rating }}
+                                </div>
+                            </div>
+                            <div class="product-info" style="padding:0">
+                                <h4 class="title"><a href="{% url 'details' game.id %}">{{ game.name }}</a></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--== End prPduct Item ==-->
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="pagination-wrap mt-30">
+                {% if games.has_other_pages %}
+                <nav aria-label="Page navigation" style="margin-left:650px">
+                    <ul class="pagination pagination-lg">
+                        <li>
+                            <a href="?page=1" aria-label="Next">
+                            <span aria-hidden="true"><</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href={% if games.has_previous %} "?page={{ games.previous_page_number }}" {% else %} "#"
+                            {% endif %}
+                            aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% if games.number <= 3 %}
+                        {% for i in 5|get_range %}
+                        {% if games.number == i %}
+                        <li class="active"><a>{{ i }}</a></li>
+                        {% else %}
+                        <li><a href="?page={{ i }}">{{i}}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% elif games.number >= games.paginator.num_pages|add:-2%}
+                        {% for i in games.paginator.num_pages|get_range_tail %}
+                        {% if games.number == i %}
+                        <li class="active"><a>{{ i }}</a></li>
+                        {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                        {%endfor%}
+                        {% else %}
+                        <li><a href="?page={{ games.number|add:-2 }}">{{ games.number|add:-2 }}</a></li>
+                        <li><a href="?page={{ games.number|add:-1 }}">{{ games.number|add:-1 }}</a></li>
+                        <li class="active"><a>{{ games.number }}</a></li>
+                        <li><a href="?page={{ games.number|add:1 }}">{{ games.number|add:1 }}</a></li>
+                        <li><a href="?page={{ games.number|add:2 }}">{{ games.number|add:2 }}</a></li>
+                        {% endif %}
+
+                        <li>
+                            <a href={% if games.has_next %} "?page={{ games.next_page_number }}" {% else %} "#"
+                            {% endif %}
+                            aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page={{games.paginator.num_pages}}" aria-label="Next">
+                            <span aria-hidden="true">></span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

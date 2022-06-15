@@ -1,0 +1,43 @@
+{%extends 'base.html' %}
+{% block content %}
+
+<!--== Start Product Details Area Wrapper ==-->
+<section class="section-space">
+    <div class="container">
+        <div class="row product-details">
+            <div class="col-lg-6">
+                <div class="product-details-thumb">
+                    <img src="{{ game.image }}" width="570" height="693" alt="Image">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="product-details-content">
+                    <h5 class="product-details-collection">{{ game.author }}</h5>
+                    <h3 class="product-details-title">{{ game.name }}</h3>
+                    <div class="product-details-review mb-7">
+                        <div class="product-review-icon">
+                            {{ game.star_rating }}
+                        </div>
+                        <div class="product-review-icon">
+                            {{ game.content_rating }}
+                        </div>
+                    </div>
+                    <p class="mb-7">
+                        {{ game.introduction }}
+                    </p>
+                    <div class="product-details-pro-qty">
+                        <div class="pro-qty">
+                            <a type="submit" class="btn" data-bs-toggle="modal" href="{{ game.apk }}" target="_blank"
+                                   data-bs-target="#action-CartAddModal">Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!--== End Product Details Area Wrapper ==-->
+
+{% endblock %}

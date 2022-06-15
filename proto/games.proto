@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package account;
+
+import "google/protobuf/empty.proto";
+
+service UserController {
+    rpc List(GameListRequest) returns (stream Game) {}
+    rpc Create(Game) returns (Game) {}
+    rpc Retrieve(GameRetrieveRequest) returns (Game) {}
+    rpc Update(Game) returns (Game) {}
+    rpc Destroy(Game) returns (google.protobuf.Empty) {}
+}
+
+message Game {
+    int32 id = 1;
+    string name = 2;
+    string author = 3;
+    string star_content = 4;
+    string download_times = 5;
+    string content_rating = 6;
+    string introduction = 7;
+    string update_time = 8;
+    string genre = 9;
+    repeated int32 groups = 10;
+}
+
+message GameListRequest {
+}
+
+message GameRetrieveRequest {
+    int32 id = 1;
+}
