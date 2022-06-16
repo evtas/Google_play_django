@@ -4,7 +4,11 @@ from .models import Games
 from django.core.paginator import Paginator
 from django.template.defaulttags import register
 import os
-import django
+
+
+def nginx_view(request):
+    html = "<h1>Using port " + request.META["SERVER_PORT"] + "<h1>"
+    return HttpResponse(html)
 
 
 def search(request):

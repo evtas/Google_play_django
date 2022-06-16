@@ -16,9 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from google_play_games.proto import games_pb2_grpc
-from google_play_games.proto import games_pb2_grpc
-from google_play_games.games.services import GameService
 
 urlpatterns = [
     path('games/', include('games.urls')),
@@ -26,5 +23,3 @@ urlpatterns = [
 ]
 
 
-def grpc_handlers(server):
-    games_pb2_grpc.add_UserControllerServicer_to_server(GameService.as_servicer(), server)
