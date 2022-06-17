@@ -4,6 +4,13 @@ from .models import Games
 from django.core.paginator import Paginator
 from django.template.defaulttags import register
 import os
+import grpc
+from . import game_pb2_grpc
+from . import game_pb2
+# import game_pb2_grpc, game_pb2
+
+_HOST = '0.0.0.0'
+_PORT = '50051'
 
 
 def nginx_view(request):
@@ -29,7 +36,12 @@ def search(request):
 
 
 def details(request, game_id=None):
-    game = get_object_or_404(Games, pk=game_id)
+    conn = grpc.insecure_channel(_HOST + ':' + _PORT)
+    client = game_pb2_grpc.GamerStub(channel=conn)
+    req = game_pb2.GameRequest(id=game_id)
+    game = client.GetGameDetail(req)
+    print(game)
+    # game = get_object_or_404(Games, pk=game_id)
     context = {'game': game}
 
     return render(request, 'detail.html', context)
@@ -64,3 +76,4 @@ def get_range_tail(value):
     start = value - 4
     print(start, " ", value + 1)
     return range(start, value + 1)
+

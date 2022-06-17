@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-mj@ko_5go=lx8s&2zafi%%l1dx#*fn&w=7ni5_ut@a%l2&3ewk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['google-play']
+ALLOWED_HOSTS = ['google-play', '127.0.0.1']
 
 
 # Application definition
